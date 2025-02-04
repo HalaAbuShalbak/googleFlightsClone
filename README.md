@@ -35,7 +35,7 @@ app .js
 [+] pages (home , results , flight )
 
 ### hour 2 
-[ ] sketch the wireframe
+[+] sketch the wireframe
 
 [ ] Prepare the layout
 
