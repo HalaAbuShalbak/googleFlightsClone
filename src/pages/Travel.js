@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-const Travel = () => {
+const Travel = () => {  
+
+
+
+
+
   return (
-    <div>Travel</div>
-  )
+ <>
+ </>
+)
+
+ 
 }
 
 export default Travel

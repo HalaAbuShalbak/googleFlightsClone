@@ -8,6 +8,7 @@ export const flightSlice = createSlice({
   reducers: {
     getAllFlights: (state, action) => {
       state.allFlights.push(action.payload);
+      localStorage.setItem("flightsData", JSON.stringify(action.payload));
     },
   },
 });
