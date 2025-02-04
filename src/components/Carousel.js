@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Box from "@mui/material/Box";
-import { useSelector, useDispatch } from "react-redux";
+import {useDispatch } from "react-redux";
 import { getAllFlights } from "../services/redux/flightSlice";
 
 const Carousel = () => {
   const dispatch = useDispatch();
-  const { allFlights } = useSelector((state) => state.flight);
   const [steps, setSteps] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -42,7 +41,7 @@ const Carousel = () => {
       });
   };
   useEffect(() => {
-    getFlights()
+    // getFlights()
     if (steps.length === 0) return;
 
     const interval = setInterval(() => {

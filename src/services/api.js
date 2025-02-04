@@ -9,28 +9,28 @@ navigator.geolocation.getCurrentPosition(function (location) {
   latitude = location.coords.longitude;
 });
 
-apis.getNearbyAirports = () => {
-    const options = {
-        method: 'GET',
-        url: 'https://sky-scrapper.p.rapidapi.com/api/v1/flights/getNearByAirports',
-        params: {
-          lat: latitude,
-          lng: longitude,
-          locale: 'en-US'
-        },
-        headers: {
-          'x-rapidapi-key': Key,
-          'x-rapidapi-host': 'sky-scrapper.p.rapidapi.com'
-        }
-      };
-  axios.request(options)
-    .then((result) => {
-      console.log(result.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+// apis.getNearbyAirports = () => {
+//     const options = {
+//         method: 'GET',
+//         url: 'https://sky-scrapper.p.rapidapi.com/api/v1/flights/getNearByAirports',
+//         params: {
+//           lat: latitude,
+//           lng: longitude,
+//           locale: 'en-US'
+//         },
+//         headers: {
+//           'x-rapidapi-key': Key,
+//           'x-rapidapi-host': 'sky-scrapper.p.rapidapi.com'
+//         }
+//       };
+//   axios.request(options)
+//     .then((result) => {
+//       // console.log(result.data);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// };
 
 
 export default apis;
