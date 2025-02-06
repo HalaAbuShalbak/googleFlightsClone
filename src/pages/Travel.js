@@ -119,7 +119,7 @@ cabinClass =[{economy: Economy},{premium_economy: Premium Economy},{business: Bu
     try {
       const response = await axios.request(options);
       console.log(response.data);
-dispatch(flightsByDes(response.data.data))
+dispatch(getFlightsByDestination(response.data.data))
 if(response.data.data.context.status){
   setSuccess(true)
   setMsg(true)

@@ -58,7 +58,7 @@ const NearbyAirPorts = () => {
   }, [airports]);
 
   return (
-    <Box sx={{ width: "91%", height: "100%", margin: "auto" }}>
+    <Box sx={{ width: "100%", height: "100%", margin: "auto", minHeight:"100%" }}>
       {airports.length > 0 && (
         <>
           <h3>What are you waiting for ? There's a lot missing you !</h3>
@@ -72,7 +72,7 @@ const NearbyAirPorts = () => {
               alignItems: "center",
               backgroundColor: "skyblue",
               borderRadius: "10px",
-              minHeight:"auto",
+              minHeight:"100%",
             
             }}
           >

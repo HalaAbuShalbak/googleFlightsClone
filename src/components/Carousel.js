@@ -54,7 +54,7 @@ console.log(allFlights)
   }, [allFlights]);
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box sx={{ width: "100%", height:"100%" }}>
       {images.length > 0 && (
         <>
           <Box
