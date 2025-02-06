@@ -1,13 +1,14 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
 import Carousel from '../components/Carousel'
+import NearbyAirPorts from './NearbyAirPorts'
 
 const Home = () => {
 
   return (
     <>
-    <Navbar/>
+    <NearbyAirPorts/>
     <Carousel/>
+
     </>
   )
 }
