@@ -63,6 +63,8 @@ console.log(allFlights)
               flexDirection: "row",
               pt: 2,
               justifyContent: "center",
+              minWidth: "100%",
+              minHeight:"100%"
             }}
           >
             <Box sx={{ flex: "1 1 1" }} />

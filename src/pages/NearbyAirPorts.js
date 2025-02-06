@@ -72,6 +72,8 @@ const NearbyAirPorts = () => {
               alignItems: "center",
               backgroundColor: "skyblue",
               borderRadius: "10px",
+              minHeight:"auto",
+            
             }}
           >
             <Box sx={{ flex: "1 1 1" }} />

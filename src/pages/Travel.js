@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
 import {
-  TextField,
-  MenuItem,
-  Select,
-  InputLabel,
-  FormControl,
-  Grid,
+  Box,
   Typography,
+  Grid,
+  TextField,
   Button,
-  Box
-} from '@mui/material';
-
+} from "@mui/material";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 const Travel = () => {  
-  const [from, setFrom] = useState('');
-  const [to, setTo] = useState('');
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  const [departureDate, setDepartureDate] = useState(dayjs());
+  const [returningDate, setReturningDate] = useState(dayjs());
+
   const [adultCount, setAdultCount] = useState(1);
   const [childCount, setChildCount] = useState(0);
   const [infantCount, setInfantCount] = useState(0);
@@ -22,28 +23,17 @@ const Travel = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     switch (name) {
-      case 'from':
+      case "from":
         setFrom(value);
         break;
-      case 'to':
+      case "to":
         setTo(value);
-        break;
-      case 'adultCount':
-        setAdultCount(value);
-        break;
-      case 'childCount':
-        setChildCount(value);
-        break;
-      case 'infantCount':
-        setInfantCount(value);
-        break;
-      case 'stopCount':
-        setStopCount(value);
         break;
       default:
         break;
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log({
@@ -52,18 +42,35 @@ const Travel = () => {
       adultCount,
       childCount,
       infantCount,
-      stopCount
+      stopCount,
     });
   };
 
+  // Function to handle + and - button clicks
+  const handleCounterChange = (type, action) => {
+    switch (type) {
+      case "adult":
+        setAdultCount((prev) => Math.max(1, prev + action));
+        break;
+      case "child":
+        setChildCount((prev) => Math.max(0, prev + action));
+        break;
+      case "infant":
+        setInfantCount((prev) => Math.max(0, prev + action));
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
-    <Box sx={{ padding: '20px', maxWidth: 600, margin: 'auto' }}>
+    <Box sx={{ padding: "20px", maxWidth: 600, margin: "auto" }}>
       <Typography variant="h5" gutterBottom>
         Flight Search
       </Typography>
 
       <form onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
+        <Grid container spacing={2} >
           {/* From */}
           <Grid item xs={12} sm={6}>
             <TextField
@@ -88,82 +95,68 @@ const Travel = () => {
             />
           </Grid>
 
-          {/* Passengers Type and Number */}
-          <Grid item xs={12} sm={4}>
-            <FormControl fullWidth>
-              <InputLabel>Adults</InputLabel>
-              <Button>+</Button>
-              <Button>-</Button>
-
-             
-               
-            
-            </FormControl>
+          <Grid item xs={12} sm={6} >
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Departure Date"
+                value={departureDate}
+                onChange={(newDate) => setDepartureDate(newDate)}
+                renderInput={(params) => <TextField {...params} fullWidth />}
+              />
+            </LocalizationProvider> 
           </Grid>
 
+             {/* returning */}
+             <Grid item xs={12} sm={6} >
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Returning Date"
+                value={returningDate}
+                onChange={(newDate) => setReturningDate(newDate)}
+                renderInput={(params) => <TextField {...params} fullWidth />}
+              />
+            </LocalizationProvider>
+     
+
+          </Grid>
+        
+        
+         
+
+
+          {/* Adults Counter */}
           <Grid item xs={12} sm={4}>
-            <FormControl fullWidth>
-              <InputLabel>Children</InputLabel>
-              <Select
-                name="childCount"
-                value={childCount}
-                onChange={handleInputChange}
-                label="Children"
-              >
-                {[...Array(10).keys()].map((i) => (
-                  <MenuItem key={i} value={i}>
-                    {i}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <Typography>Adults</Typography>
+            <Button onClick={() => handleCounterChange("adult", -1)}>-</Button>
+            <Typography component="span" sx={{ margin: "0 10px" }}>
+              {adultCount}
+            </Typography>
+            <Button onClick={() => handleCounterChange("adult", 1)}>+</Button>
           </Grid>
 
+          {/* Children Counter */}
           <Grid item xs={12} sm={4}>
-            <FormControl fullWidth>
-              <InputLabel>Infants</InputLabel>
-              <Select
-                name="infantCount"
-                value={infantCount}
-                onChange={handleInputChange}
-                label="Infants"
-              >
-                {[...Array(5).keys()].map((i) => (
-                  <MenuItem key={i} value={i}>
-                    {i}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+            <Typography>Children</Typography>
+            <Button onClick={() => handleCounterChange("child", -1)}>-</Button>
+            <Typography component="span" sx={{ margin: "0 10px" }}>
+              {childCount}
+            </Typography>
+            <Button onClick={() => handleCounterChange("child", 1)}>+</Button>
           </Grid>
 
-          {/* Number of Stops */}
-          <Grid item xs={12}>
-            <FormControl fullWidth>
-              <InputLabel>Stops</InputLabel>
-              <Select
-                name="stopCount"
-                value={stopCount}
-                onChange={handleInputChange}
-                label="Stops"
-              >
-                {[...Array(6).keys()].map((i) => (
-                  <MenuItem key={i} value={i}>
-                    {i === 0 ? 'Direct' : `${i} Stop${i > 1 ? 's' : ''}`}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+          {/* Infants Counter */}
+          <Grid item xs={12} sm={4}>
+            <Typography>Infants</Typography>
+            <Button onClick={() => handleCounterChange("infant", -1)}>-</Button>
+            <Typography component="span" sx={{ margin: "0 10px" }}>
+              {infantCount}
+            </Typography>
+            <Button onClick={() => handleCounterChange("infant", 1)}>+</Button>
           </Grid>
 
           {/* Submit Button */}
           <Grid item xs={12}>
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              fullWidth
-            >
+            <Button type="submit" variant="contained" color="primary" fullWidth>
               Search Flights
             </Button>
           </Grid>
